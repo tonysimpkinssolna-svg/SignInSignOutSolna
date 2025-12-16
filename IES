@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Visitor Portal</h1>
+  <a href="form.html" style="padding:10px; background:blue; color:white; text-decoration:none;">Click here to Sign In / Sign Out</a>
+</body>
+</html>
