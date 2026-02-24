@@ -1,0 +1,38 @@
+/* BASIC RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    overflow: hidden; /* Prevents scrolling on the main body */
+    height: 100vh;
+    width: 100vw;
+}
+
+/* VIEW MANAGEMENT */
+.view {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.3s ease;
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
+    z-index: -1;
+}
+
+.active {
+    display: flex;
+    opacity: 1;
+    z-index: 1;
+}
