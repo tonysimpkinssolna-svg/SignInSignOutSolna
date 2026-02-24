@@ -1,11 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Reception Kiosk</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-  <p><a href="index.html">⬅ Back to Home Page</a></p>
 
-  <hr>
+    <div id="menu-view" class="view active">
+        <div class="logo-container">
+            <img src="logo.png" alt="School Logo" class="school-logo">
+            <h1>Welcome to Our School</h1>
+            <p>Please select an option below</p>
+        </div>
+        
+        <div class="button-container">
+            <button class="btn sign-in" onclick="showForm('signin-view')">
+                Visitor Sign In
+            </button>
+            
+            <button class="btn sign-out" onclick="showForm('signout-view')">
+                Visitor Sign Out
+            </button>
+        </div>
+    </div>
 
-  https://docs.google.com/forms/d/e/1FAIpQLSdSmbfDougrDBD1BM2olMn4-IwzBnn5HpRGpHEYi4MQUa5dpw/viewform?usp=header
+    <div id="signin-view" class="view hidden">
+        <div class="top-bar">
+            <button class="back-btn" onclick="showMenu()">&#8592; Back to Home</button>
+        </div>
+        <iframe 
+            src="https://docs.google.com/forms/d/e/1FAIpQLSdSmbfDougrDBD1BM2olMn4-IwzBnn5HpRGpHEYi4MQUa5dpw/viewform?embedded=true" 
+            frameborder="0" 
+            marginheight="0" 
+            marginwidth="0">
+            Loading…
+        </iframe>
+    </div>
 
+    <div id="signout-view" class="view hidden">
+        <div class="top-bar">
+            <button class="back-btn" onclick="showMenu()">&#8592; Back to Home</button>
+        </div>
+        <iframe 
+            src="https://docs.google.com/forms/d/e/1FAIpQLSc92j_9bUru3jFBYjjoLVL0wQ4G8GOsEMetCY8FRnbLKy-p8w/viewform?embedded=true" 
+            frameborder="0" 
+            marginheight="0" 
+            marginwidth="0">
+            Loading…
+        </iframe>
+    </div>
+
+    <script>
+        // --- LOGIC: VIEW SWITCHING ---
+        function showForm(viewId) {
+            // Hide all views
+            document.querySelectorAll('.view').forEach(el => {
+                el.classList.remove('active');
+                el.classList.add('hidden');
+            });
+            // Show the requested view
+            const target = document.getElementById(viewId);
+            target.classList.remove('hidden');
+            target.classList.add('active');
+            
+            // Reset timer when switching views
+            resetTimer();
+        }
+
+        function showMenu() {
+            // Hide forms, show menu
+            document.getElementById('signin-view').classList.add('hidden');
+            document.getElementById('signin-view').classList.remove('active');
+            document.getElementById('signout-view').classList.add('hidden');
+            document.getElementById('signout-view').classList.remove('active');
+            
+            document.getElementById('menu-view').classList.remove('hidden');
+            document.getElementById('menu-view').classList.add('active');
+            
+            // Reload the iframes to clear the form if it was filled out
+            refreshIframes();
+        }
+
+        function refreshIframes() {
+            const iframes = document.querySelectorAll('iframe');
+            iframes.forEach(iframe => {
+                iframe.src = iframe.src;
+            });
+        }
+
+        // --- LOGIC: INACTIVITY TIMER (60 Seconds) ---
+        let idleTime = 0;
+        const idleLimit = 60; // Seconds before reset
+
+        // Increment the idle timer every second
+        setInterval(timerIncrement, 1000);
+
+        function timerIncrement() {
+            idleTime = idleTime + 1;
+            if (idleTime > idleLimit) { 
+                // If user is idle, force reload to home menu
+                showMenu();
+                idleTime = 0;
+            }
+        }
+
+        // Reset timer on mouse movement or touch
+        document.onload = resetTimer;
+        document.onmousemove = resetTimer;
+        document.onmousedown = resetTimer; // touchscreen press
+        document.ontouchstart = resetTimer; // touchscreen swipe
+        document.onclick = resetTimer;      // touchpad click
+        document.onkeypress = resetTimer;   // keyboard
+
+        function resetTimer() {
+            idleTime = 0;
+        }
+    </script>
 </body>
 </html>
+
