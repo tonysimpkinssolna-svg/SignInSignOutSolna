@@ -8,7 +8,7 @@
 
 body {
     background-color: #f4f4f4;
-    overflow: hidden; /* Prevents scrolling on the main body */
+    overflow: hidden;
     height: 100vh;
     width: 100vw;
 }
@@ -44,17 +44,22 @@ body {
     background: white;
 }
 
+/* Logo container */
 .logo-container {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 
-.logo {
-    max-height: 150px; /* Limits logo height so it doesn't take over */
-    max-width: 90%;
+/* ✅ FIXED LOGO SIZE */
+.school-logo {
+    max-height: 140px;   /* Controls height */
+    max-width: 300px;    /* Prevents it being huge */
+    width: auto;
+    height: auto;
     margin-bottom: 20px;
 }
 
+/* Headings */
 h1 {
     color: #333;
     font-size: 2.5rem;
@@ -66,9 +71,10 @@ p {
     font-size: 1.2rem;
 }
 
+/* Buttons */
 .button-container {
     display: flex;
-    gap: 40px; /* Space between buttons */
+    gap: 40px;
     width: 80%;
     max-width: 800px;
 }
@@ -81,21 +87,22 @@ p {
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn:active {
     transform: scale(0.98);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
-/* Green Button for Sign In */
+/* Green Button */
 .sign-in {
     background-color: #2ecc71;
     color: white;
 }
 
-/* Red/Orange Button for Sign Out */
+/* Red Button */
 .sign-out {
     background-color: #e74c3c;
     color: white;
@@ -126,18 +133,25 @@ p {
 }
 
 iframe {
-    flex: 1; /* Takes up remaining height */
+    flex: 1;
     width: 100%;
     border: none;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media only screen and (max-width: 600px) {
-    .logo-container {
+    .button-container {
         flex-direction: column;
+        gap: 20px;
     }
 
     .btn {
         width: 100%;
+        padding: 30px 15px;
+        font-size: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
     }
 }
